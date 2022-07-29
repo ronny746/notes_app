@@ -30,26 +30,28 @@ class _SplashState extends State<Splash> {
             fit: BoxFit.cover,
           ),
         ),
-        Column(mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(margin: EdgeInsets.only(bottom: 100),
-                  height: 120,
-                  width: 100,
-                  child: Image.asset(
-                    "assets/Group468.png",
-                    fit: BoxFit.contain,
-                  )),
-                  
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 70),
-              child: Text("WELCOME",style: GoogleFonts.roboto(fontSize: 30),),
-            )
-            
-          ]
-        ),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 100),
+                    height: 100,
+                    width: 100,
+                    child: Image.asset(
+                      "assets/Group468.png",
+                      fit: BoxFit.contain,
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Text(
+                  "Welcome To Notes",
+                  style: GoogleFonts.roboto(fontSize: 30, color: Colors.white),
+                ),
+              )
+            ]),
       ]),
     );
   }

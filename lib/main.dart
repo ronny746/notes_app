@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/Screens/add_task.dart';
+import 'package:notes_app/Screens/home.dart';
 import 'package:notes_app/Screens/splash.dart';
 
 import 'package:notes_app/firebase_options.dart';

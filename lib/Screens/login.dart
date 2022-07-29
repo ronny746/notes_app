@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 200.0, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 160.0, left: 30, right: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -82,26 +82,24 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 Pinput(
-                  onSubmitted: ((pin) async {
-                    try {
-                      await FirebaseAuth.instance
-                          .signInWithCredential(PhoneAuthProvider.credential(
-                              verificationId: _verificationCode!, smsCode: pin))
-                          .then((value) async {
-                        if (value.user != null) {
-                          verifiyied = 1;
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Home()),
-                              (route) => false);
-                        }
-                      });
-                    } catch (e) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(e.toString())));
-                    }
-                  }),
+                  defaultPinTheme: PinTheme(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                          Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    height: 50,
+                    width: 50,
+                  ),
+                  focusedPinTheme: PinTheme(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Color.fromRGBO(234, 239, 243, 1)),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white)),
                   length: 6,
                   controller: _pinPutController,
                   focusNode: focusNode,
@@ -124,21 +122,38 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_circle_right_outlined,
-                        size: 50,
-                        color: Colors.greenAccent,
-                      ),
-                      onPressed: () {
-                        if (verifiyied == 0) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => Home()),
-                              (route) => false);
-                        }
-                      },
-                    )
+                    Card(
+                        color: Colors.lightGreen,
+                        margin: EdgeInsets.only(top: 20),
+                        elevation: 30,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          onPressed: (() async {
+                            try {
+                              await FirebaseAuth.instance
+                                  .signInWithCredential(
+                                      PhoneAuthProvider.credential(
+                                          verificationId: _verificationCode!,
+                                          smsCode: _pinPutController.text))
+                                  .then((value) async {
+                                if (value.user != null) {
+                                  verifiyied = 1;
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()),
+                                      (route) => false);
+                                }
+                              });
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())));
+                            }
+                          }),
+                          icon: const Icon(Icons.arrow_right_alt),
+                          iconSize: 40,
+                        )),
                   ],
                 )
               ],
@@ -169,6 +184,7 @@ class _LoginPageState extends State<LoginPage> {
         },
         codeSent: (String? verficationID, int? resendToken) {
           setState(() {
+            verifiyied = 1;
             _verificationCode = verficationID;
           });
         },
@@ -177,6 +193,6 @@ class _LoginPageState extends State<LoginPage> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(seconds: 120));
+        timeout: Duration());
   }
 }
