@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_app/Screens/home.dart';
 import 'package:pinput/pinput.dart';
 
@@ -38,13 +39,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 160.0, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 160, left: 33, right: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                    height: 120,
-                    width: 100,
+                    height: 100,
+                    width: 80,
                     child: Image.asset(
                       "assets/Group468.png",
                       fit: BoxFit.contain,
@@ -52,19 +53,18 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  "Welcome To Notes  ",
-                  style: TextStyle(fontSize: 30),
-                ),
+                Text("Welcome To Notes  ",
+                    style: GoogleFonts.akshar(
+                        fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(
                   height: 30,
                 ),
                 Container(
                   height: 60,
                   child: Card(
-                    elevation: 10,
+                    elevation: 1,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: TextFormField(
                       controller: mobileController,
@@ -85,36 +85,42 @@ class _LoginPageState extends State<LoginPage> {
                   defaultPinTheme: PinTheme(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border:
-                          Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+                      border: Border.all(
+                          color: const Color.fromRGBO(234, 239, 243, 1)),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     height: 50,
-                    width: 50,
+                    width: 40,
                   ),
                   focusedPinTheme: PinTheme(
-                      height: 50,
-                      width: 50,
+                      height: 40,
+                      width: 40,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              color: Color.fromRGBO(234, 239, 243, 1)),
+                              color: const Color.fromRGBO(234, 239, 243, 1)),
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white)),
                   length: 6,
                   controller: _pinPutController,
                   focusNode: focusNode,
-                  separator: SizedBox(width: 16),
+                  separator: const SizedBox(width: 16),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    SizedBox(
+                      width: 40,
+                    ),
                     TextButton(
                       onPressed: () {
                         _verifyPhone();
                       },
                       child: Text(
-                        "Send OTP",
-                        style: TextStyle(fontSize: 25, color: Colors.black),
+                        "      Send OTP",
+                        style: GoogleFonts.akshar(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
                     )
                   ],
@@ -122,12 +128,11 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Card(
-                        color: Colors.lightGreen,
-                        margin: EdgeInsets.only(top: 20),
-                        elevation: 30,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25)),
+                    Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 174, 34),
+                            shape: BoxShape.circle),
+                        margin: const EdgeInsets.only(top: 20),
                         child: IconButton(
                           onPressed: (() async {
                             try {
@@ -193,6 +198,6 @@ class _LoginPageState extends State<LoginPage> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration());
+        timeout: const Duration());
   }
 }

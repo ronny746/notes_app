@@ -9,7 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notes_app/Screens/home.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:notes_app/Screens/list_cubic.dart';
+
 
 class AddTask extends StatefulWidget {
   @override
@@ -22,12 +22,7 @@ class _AddTaskState extends State<AddTask> {
   FocusNode focusNode = new FocusNode();
 
   addtasktofirebase() async {
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child("UserProfiles")
-        .child(DateTime.now().toString());
-    await ref.putFile(image!);
-    imageUrl = await ref.getDownloadURL();
+   
     FirebaseAuth auth = FirebaseAuth.instance;
     final User user = await auth.currentUser!;
     String uid = user.uid;
@@ -42,7 +37,6 @@ class _AddTaskState extends State<AddTask> {
       'description': descriptionController.text,
       'time': time.toString(),
       'uid': uid,
-      'ImageUrl': imageUrl,
       'timestamp': time
     });
     Fluttertoast.showToast(msg: 'Data Added');

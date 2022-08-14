@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
             children: [
               Center(
                 child: Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 100),
+                    margin: EdgeInsets.only(top: 30, bottom: 60),
                     height: 100,
                     width: 100,
                     child: Image.asset(
@@ -45,10 +45,10 @@ class _SplashState extends State<Splash> {
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 80),
+                padding: const EdgeInsets.only(bottom: 140),
                 child: Text(
                   "Welcome To Notes",
-                  style: GoogleFonts.roboto(fontSize: 30, color: Colors.white),
+                  style: GoogleFonts.roboto(fontSize: 20, color: Colors.white),
                 ),
               )
             ]),
